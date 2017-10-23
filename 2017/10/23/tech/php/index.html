@@ -21,7 +21,7 @@
     <!--Title-->
 
 
-<title>Tag: 天马行空 | 渣渣媛想学习</title>
+<title>判断登录状态 | 渣渣媛想学习</title>
 
 
     <link rel="alternate" href="/atom.xml" title="渣渣媛想学习" type="application/atom+xml">
@@ -33,6 +33,8 @@
 
 
 
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
 
 
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
@@ -101,35 +103,107 @@
         <div class="container">
             <div class="row">
                 <main class="col-md-8 main-content">
-                    <h3> 
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="判断登录状态">
+            
+            判断登录状态
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>技术</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            php ajax session 判断登录状态
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/10/23</span>
+    </span>
+</div>
 
-    天马行空 
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <h4 id="PHP-JS-AJAX-session判断用户登录状态"><a href="#PHP-JS-AJAX-session判断用户登录状态" class="headerlink" title="PHP+JS+AJAX+session判断用户登录状态"></a>PHP+JS+AJAX+session判断用户登录状态</h4><p>目的：对于没有登录的用户不能访问某些页面。<br><br>步骤：   <br></p>
+<ol>
+<li>登录页面logintest.html上用户填写用户名，密码，发送至后台，后台创建session变量表明登录成功：<br><br>前端登录页面：<br><br><img src="/images/ajax+php/1.png" alt=""></li>
+</ol>
+<p>在提交表单时，访问后台PHP，创建session变量：<br><br><img src="/images/ajax+php/2.png" alt=""></p>
+<p>该checklogin.php文件中：   <br><br><img src="/images/ajax+php/3.png" alt=""></p>
+<p>蓝框内代码创建变量，红框内代码在验证成功时赋值变量，注意必须有session_start();语句。该php表示：用户名密码正确时页面跳转至test.html。<br></p>
+<ol>
+<li>操作页面test.html上使用JS向后台进行查询，如果变量存在即表示用户状态为登录，可以访问，否则不能访问，可跳转至登录页面。</li>
+</ol>
+<p>页面引用test.js文件，该js文件向后台test.php进行状态查询；</p>
+<p>该test.php文件中查询session对象，如果存在且为true表示用户已登录：<br><br><img src="/images/ajax+php/4.png" alt=""></p>
+<p>如果存在即返回code=200；</p>
+<p>前端JS接收值，如果为200表示用户登录，其余表示未登录：<br><br><img src="/images/ajax+php/5.png" alt=""></p>
+<p>至此判断用户状态完成！<br><br>用户在登录页面登录成功后页面跳转到test.html：<br><br><img src="/images/ajax+php/6.png" alt=""></p>
+<p>此时新开tab页直接访问该test.html页面得到上图一样的结果。</p>
+<p>但在浏览器中清除缓存后再次访问该页面，得到结果即：<br><br><img src="/images/ajax+php/7.png" alt=""></p>
+<p>因为账户未登录，导致访问失败。</p>
+<p>遇到问题：</p>
+<p>1.一开始为了方便，直接将php文件包含在html中，但是由于服务器未配置，导致php代码会被直接注释，无法起作用。</p>
+<p>2.将所有文件都放在webstorm打开时，由于webstorm的配置问题，会导致页面表单中使用action时，会直接下载该php文件。<br>3.尝试直接在php文件中使用header语句：header (“Location:test.html”) ;进行页面跳转，但是用Ajax方式提交的页面，这时候PHP是没办法控制页面跳转的，只能是Js获取到页面的返回值，然后通过Js来跳转页面。</p>
+<p>虽然看似简单，但是因为基础较差，还需要看似不那么难的3个问题，导致搞了一天才把功能实现，也是够醉！！</p>
+<p>源代码下载链接：<a href="https://github.com/meixufen/php-ajax-session-" target="_blank" rel="external">https://github.com/meixufen/php-ajax-session-</a></p>
 
+    </div>
 
-</h3>
-
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/2017/09/16/emotion/September/">9月的一些瞎想</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2017年09月16日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-                test
-
-            </p> 
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
         </div>
-    </article>
- 
+        <div>
+            
+                License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2017/09/16/travel/天津/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
 
 
+    <div id="comments">
+        
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+
+
+
+
+
+
+
+
+    </div>
 
 
 
@@ -220,6 +294,11 @@
         </div>
     </div>
 </div>
+
+  <script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
 
 <script src="/js/app.js?rev=@@hash"></script>
 
