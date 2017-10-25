@@ -159,6 +159,7 @@
 <p>此时新开tab页直接访问该test.html页面得到上图一样的结果。</p>
 <p>但在浏览器中清除缓存后再次访问该页面，得到结果即：<br><br><img src="/images/ajax+php/7.png" alt=""></p>
 <p>因为账户未登录，导致访问失败。</p>
+<p>用户退出时只需要删除session变量即可：<br>代码：<br>session_start();<br>unset($_session[‘xxx’]);<br>session_destroy();<br>变量成功删除后再检测该变量即为空，表示未登录。</p>
 <p>遇到问题：</p>
 <p>1.一开始为了方便，直接将php文件包含在html中，但是由于服务器未配置，导致php代码会被直接注释，无法起作用。</p>
 <p>2.将所有文件都放在webstorm打开时，由于webstorm的配置问题，会导致页面表单中使用action时，会直接下载该php文件。<br>3.尝试直接在php文件中使用header语句：header (“Location:test.html”) ;进行页面跳转，但是用Ajax方式提交的页面，这时候PHP是没办法控制页面跳转的，只能是Js获取到页面的返回值，然后通过Js来跳转页面。</p>
@@ -186,7 +187,7 @@
 <div class="article-nav prev-next-wrap clearfix">
     
     
-        <a href="/2017/09/16/tech/github/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+        <a href="/2017/09/16/emotion/September/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
     
 </div>
 
@@ -243,7 +244,7 @@
     <h3 class="title">Tag Cloud</h3>
     <div class="content tag-cloud">
       
-        <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a> <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a> <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a>
+        <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a> <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a> <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a>
     </div>
   </div>
 
