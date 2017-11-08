@@ -21,7 +21,7 @@
     <!--Title-->
 
 
-<title>11月论文阅读 | 渣渣媛想学习</title>
+<title>nginx配置文件 | 渣渣媛想学习</title>
 
 
     <link rel="alternate" href="/atom.xml" title="渣渣媛想学习" type="application/atom+xml">
@@ -106,9 +106,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="11月论文阅读">
+        <h1 id="nginx配置文件">
             
-            11月论文阅读
+            nginx配置文件
             
         </h1>
         <div class="post-meta">
@@ -124,7 +124,7 @@
         <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            阅读论文
+            nginx
             
         </span>
     </span>
@@ -132,7 +132,7 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2017/11/06</span>
+        <span class="date-meta">2017/11/08</span>
     </span>
 </div>
 
@@ -141,8 +141,19 @@
     </div>
     
     <div class="post-body">
-        <h3 id="题目：Extension-Breakdown-Security-Analysis-of-Browsers-Extension-Resources-Control-Policies"><a href="#题目：Extension-Breakdown-Security-Analysis-of-Browsers-Extension-Resources-Control-Policies" class="headerlink" title="题目：Extension Breakdown: Security Analysis of Browsers Extension Resources Control Policies"></a>题目：Extension Breakdown: Security Analysis of Browsers Extension Resources Control Policies</h3><p>这篇文章分析了chromium类浏览器扩展、firefox浏览器扩展和Safari浏览器扩展的资源控制策略，前两类浏览器对扩展资源进行共有和私有配置控制访问，而Safari浏览器对每次会话提供随机URI保护资源被访问，文章提出了基于时间侧信道的攻击方式攻击对用户进行扩展枚举攻击，该方式适用于chromium类浏览器、firefox浏览器和opera浏览器，并提出使用静态JS分析的方法分析Safari浏览器扩展中存在的随机URI泄露，最后提出几种对策防御这两类攻击方式。</p>
-<p>原文pdf：<a href="http://ts.whu.edu.cn//upload/pdf/Extension%20Breakdown%20Security%20Analysis%20of%20Browsers%20Extension%20Resources%20Control%20Policies.pdf" target="_blank" rel="external">http://ts.whu.edu.cn//upload/pdf/Extension%20Breakdown%20Security%20Analysis%20of%20Browsers%20Extension%20Resources%20Control%20Policies.pdf</a><br>PPT：<a href="http://ts.whu.edu.cn//upload/pdf/ppt-Extension%20Breakdown%20Security%20Analysis%20of%20Browsers%20Extension%20Resources%20Control%20Policies.pdf" target="_blank" rel="external">http://ts.whu.edu.cn//upload/pdf/ppt-Extension%20Breakdown%20Security%20Analysis%20of%20Browsers%20Extension%20Resources%20Control%20Policies.pdf</a></p>
+        <p>记录下配置实验室服务器时操作，更多内容后续补充~</p>
+<p>安装好nginx后，配置文件位于：/etc/nginx/下；</p>
+<p>/etc/nginx/sites-available下的文件需要创建软链接到sites-enabled 目录；<br>ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default</p>
+<p>###Default文件<br>server {<br>    listen 80;             //监听端口，本地服务器的默认端口是3000. Roots运行在1111端口。SSL在443端口。互联网的默认端口是80,<br>    server_name example.com;           //访问域名<br>    root /var/www/example;              //站点目录</p>
+<pre><code>location / {
+    try_files $url $url/ /index.html;       //首先查找未命名的文件，然后查找未命名的文件夹，最后查找并加载根目录下的/index.html.
+}
+</code></pre><p>}</p>
+<p>添加了 server 选项，在nginx运行时，会查找 /etc/sites-enabled 目录下的所有配置文件用于显示对应内容。<br>但因为nginx并不知道你所作的这些改动。为了让nginx真正读取新配置文件，需要重启服务器</p>
+<p>####重启命令1：<br>service nginx reload<br>该命令等价于：<br>/etc/init.d/nginx reload</p>
+<p>####重启命令2：<br>nginx -c /etc/nginx/nginx.conf</p>
+<p>####停止：<br>ps -ef | grep nginx<br>kill -QUIT 主进程号</p>
+<p>####检查指定的nginx配置文件，是否正确<br>nginx -t -c /usr/nginx/conf/nginx.conf</p>
 
     </div>
 
@@ -164,10 +175,8 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2017/11/08/tech/nginx配置文件/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
     
-    
-        <a href="/2017/10/23/tech/php/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+        <a href="/2017/11/06/tech/paper11-4/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
     
 </div>
 
