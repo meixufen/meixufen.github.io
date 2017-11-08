@@ -83,7 +83,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation" class=""><a href="/">首頁</a></li>
+                            <li role="presentation" class=""><a href="/">首页</a></li>
                         
                             <li role="presentation" class=""><a href="/categories/技术/">技术</a></li>
                         
@@ -151,11 +151,11 @@
 }
 </code></pre><p>}</p>
 <p>添加了 server 选项，在nginx运行时，会查找 /etc/sites-enabled 目录下的所有配置文件用于显示对应内容。<br>但因为nginx并不知道你所作的这些改动。为了让nginx真正读取新配置文件，需要重启服务器</p>
-<h4 id="重启命令1："><a href="#重启命令1：" class="headerlink" title="重启命令1："></a>重启命令1：</h4><p>service nginx reload<br>该命令首先将nginx服务设置为系统服务才行，设置方法为：<br>下载nginx(<a href="http://sean-images.qiniudn.com/nginx)到/etc/init.d/，修改里面的路径然后赋予可执行权限。" target="_blank" rel="external">http://sean-images.qiniudn.com/nginx)到/etc/init.d/，修改里面的路径然后赋予可执行权限。</a></p>
+<h3 id="重启命令1："><a href="#重启命令1：" class="headerlink" title="重启命令1："></a>重启命令1：</h3><p>service nginx reload<br>该命令首先将nginx服务设置为系统服务才行，设置方法为：<br>下载nginx( <a href="http://sean-images.qiniudn.com/nginx" target="_blank" rel="external">http://sean-images.qiniudn.com/nginx</a> )到/etc/init.d/，修改里面的路径然后赋予可执行权限。</p>
 <p>该命令等价于：<br>/etc/init.d/nginx reload</p>
-<h4 id="重启命令2："><a href="#重启命令2：" class="headerlink" title="重启命令2："></a>重启命令2：</h4><p>nginx -c /etc/nginx/nginx.conf</p>
-<h4 id="停止："><a href="#停止：" class="headerlink" title="停止："></a>停止：</h4><p>ps -ef | grep nginx<br>kill -QUIT 主进程号</p>
-<h4 id="检查指定的nginx配置文件，是否正确"><a href="#检查指定的nginx配置文件，是否正确" class="headerlink" title="检查指定的nginx配置文件，是否正确"></a>检查指定的nginx配置文件，是否正确</h4><p>nginx -t -c /usr/nginx/conf/nginx.conf</p>
+<h3 id="重启命令2："><a href="#重启命令2：" class="headerlink" title="重启命令2："></a>重启命令2：</h3><p>nginx -c /etc/nginx/nginx.conf</p>
+<h3 id="停止："><a href="#停止：" class="headerlink" title="停止："></a>停止：</h3><p>ps -ef | grep nginx<br>kill -QUIT 主进程号</p>
+<h3 id="检查指定的nginx配置文件，是否正确"><a href="#检查指定的nginx配置文件，是否正确" class="headerlink" title="检查指定的nginx配置文件，是否正确"></a>检查指定的nginx配置文件，是否正确</h3><p>nginx -t -c /usr/nginx/conf/nginx.conf</p>
 <p>该博客详细介绍了有关nginx服务器安装和配置：<br><a href="http://seanlook.com/2015/05/17/nginx-install-and-config/" target="_blank" rel="external">http://seanlook.com/2015/05/17/nginx-install-and-config/</a></p>
 
     </div>
@@ -168,7 +168,7 @@
         </div>
         <div>
             
-                版權聲明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
 知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
 </a>
             
@@ -217,7 +217,7 @@
         
         
     <div class="widget">
-        <h3 class="title">分類</h3>
+        <h3 class="title">分类</h3>
         <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/技术/"><i class="fa" aria-hidden="true">技术</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/旅游/"><i class="fa" aria-hidden="true">旅游</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/"><i class="fa" aria-hidden="true">随感</i></a><span class="category-list-count">1</span></li></ul>
     </div>
 
@@ -225,7 +225,7 @@
         
         
     <div class="widget">
-      <h3 class="title">彙整</h3>
+      <h3 class="title">归档</h3>
         <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">November 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">October 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">September 2017</i></a><span class="archive-list-count">4</span></li></ul>
     </div>
 
@@ -233,10 +233,10 @@
         
         
   <div class="widget">
-    <h3 class="title">標籤雲</h3>
+    <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
       
-        <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a> <a href="undefinedtags/nginx/" style="font-size: 1em;">nginx</a> <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a> <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a> <a href="undefinedtags/阅读论文/" style="font-size: 1em;">阅读论文</a>
+        <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a> <a href="undefinedtags/阅读论文/" style="font-size: 1em;">阅读论文</a> <a href="undefinedtags/nginx/" style="font-size: 1em;">nginx</a> <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a> <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a>
     </div>
   </div>
 
@@ -244,7 +244,7 @@
         
         
     <div class="widget">
-        <h3 class="title">友鏈</h3>
+        <h3 class="title">友链</h3>
         <div class="content friends-link">
         
             <a href="http://meixufen.github.io" class="fa" target="_blank">作者博客</a>
