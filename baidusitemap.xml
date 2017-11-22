@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/09/16/tech/github/</loc>
+    <lastmod>2017-11-22T02:45:18.495Z</lastmod>
+    <data>
+        <display>
+        <title>github制作主页</title>
+        <pubTime>2017-09-16T13:01:42.000Z</pubTime>
+        
+        <tag>制作博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/11/08/tech/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
     <lastmod>2017-11-08T14:01:56.582Z</lastmod>
     <data>
@@ -77,26 +97,6 @@
            
              
               <breadCrumb title="随感" url="http://yoursite.com/categories/%E9%9A%8F%E6%84%9F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/09/16/tech/github/</loc>
-    <lastmod>2017-10-23T14:06:19.226Z</lastmod>
-    <data>
-        <display>
-        <title>github制作主页</title>
-        <pubTime>2017-09-16T13:01:42.000Z</pubTime>
-        
-        <tag>制作博客</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
           
         </display>
     </data>
