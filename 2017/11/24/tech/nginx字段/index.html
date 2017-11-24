@@ -83,7 +83,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation" class=""><a href="/">Home</a></li>
+                            <li role="presentation" class=""><a href="/">首頁</a></li>
                         
                             <li role="presentation" class=""><a href="/categories/技术/">技术</a></li>
                         
@@ -141,21 +141,19 @@
     </div>
     
     <div class="post-body">
-        <hr>
-<p>title: nginx字段<br>date: 2017-11-24 11:59:54<br>categories: 技术</p>
-<h2 id="tags-nginx"><a href="#tags-nginx" class="headerlink" title="tags: nginx"></a>tags: nginx</h2><h1 id="主模块的配置选项"><a href="#主模块的配置选项" class="headerlink" title="主模块的配置选项"></a>主模块的配置选项</h1><p>user www-data;   </p>
+        <h2 id="主模块的配置选项"><a href="#主模块的配置选项" class="headerlink" title="主模块的配置选项"></a>主模块的配置选项</h2><p>user www-data;   </p>
 <p>#设置进程以什么用户运行，编译安装时没有指定则默认为nobody账户<br>pid /run/nginx.pid;   </p>
 <p>#设置pid文件路径，可以使用kill命令发送相关信号<br>worker_processes auto;  </p>
 <p>#设置工作进程数，一个工作进程为一个单线程，在CPU密集型环境中，可以设置为CPU核数<br>worker_rlimit_nofile 100000;</p>
 <p>#worker_rlimit_nofile 更改worker进程的最大打开文件数限制。如果没设置的话，这个值为操作系统的限制。设置后你的操作系统和Nginx可以处理比“ulimit -a”更多的文件，所以把这个值设高，这样nginx就不会有“too many open files”问题了。</p>
-<h1 id="event模块配置选项"><a href="#event模块配置选项" class="headerlink" title="event模块配置选项"></a>event模块配置选项</h1><p>event模块主要控制nginx处理连接的方式<br>events {<br>  worker_connections 768;   </p>
+<h2 id="event模块配置选项"><a href="#event模块配置选项" class="headerlink" title="event模块配置选项"></a>event模块配置选项</h2><p>event模块主要控制nginx处理连接的方式<br>events {<br>  worker_connections 768;   </p>
 <p>  #一个worker进程同时打开的最大连接数</p>
 <p>  #worker_connections和worker_processes可以计算你的理论最大链接数：worker_connections*worker_processes</p>
 <pre><code>use epoll;
 </code></pre><p>#如果在configure时指定的不止一个事件模型，可以通过use告诉nginx要使用哪一个模型：seletc、poll、kqueue、epoll、rtsig、/dev/poll、eventport等，设置用于复用客户端线程的轮询方法。<br>Ps: 如果你使用Linux 2.6+，你应该使用epoll。如果你使用*BSD，你应该使用kqueue。如果你不知道Nginx该使用哪种轮询方法的话，它会选择一个最适合你操作系统的</p>
 <p>  multi_accept on;</p>
 <p>#指示nginx收到一个新连接通知后接受尽可能多的连接。<br>}</p>
-<h1 id="http模块里面主要是对http服务器相关属性进行设置"><a href="#http模块里面主要是对http服务器相关属性进行设置" class="headerlink" title="http模块里面主要是对http服务器相关属性进行设置"></a>http模块里面主要是对http服务器相关属性进行设置</h1><p>nginx配置文件主要是Http字段，一个Http字段里面可以有多个字段，一个server字段代表一个虚拟主机。一个server里面可以有多个字段，每个location代表一个URI资源。<br>http {</p>
+<h2 id="http模块里面主要是对http服务器相关属性进行设置"><a href="#http模块里面主要是对http服务器相关属性进行设置" class="headerlink" title="http模块里面主要是对http服务器相关属性进行设置"></a>http模块里面主要是对http服务器相关属性进行设置</h2><p>nginx配置文件主要是Http字段，一个Http字段里面可以有多个字段，一个server字段代表一个虚拟主机。一个server里面可以有多个字段，每个location代表一个URI资源。<br>http {</p>
 <p>  #Basic Settings  基础设置<br>  sendfile on;   </p>
 <p>#sendfile拷贝文件在内核态完成，更加高效</p>
 <p>  tcp_nopush on;</p>
@@ -194,7 +192,7 @@
 <p>  #Virtual Host Configs<br>  include /etc/nginx/conf.d/<em>.conf;<br>  include /etc/nginx/sites-enabled/</em>;</p>
 <p>  #包含sites-enabled下的所有文件</p>
 <p>  #File upload<br>  client_max_body_size 12M;</p>
-<h1 id="server模块嵌在http模块中，主要用来配置虚拟主机"><a href="#server模块嵌在http模块中，主要用来配置虚拟主机" class="headerlink" title="server模块嵌在http模块中，主要用来配置虚拟主机"></a>server模块嵌在http模块中，主要用来配置虚拟主机</h1><p>  server {</p>
+<h2 id="server模块嵌在http模块中，主要用来配置虚拟主机"><a href="#server模块嵌在http模块中，主要用来配置虚拟主机" class="headerlink" title="server模块嵌在http模块中，主要用来配置虚拟主机"></a>server模块嵌在http模块中，主要用来配置虚拟主机</h2><p>  server {</p>
 <pre><code>#指定server字段中可以被访问到的ip地址及端口
 listen       80;
 </code></pre><p>#将http请求的主机头与server中的server_name参数进行匹配，并找出第一个结果，如果没有server_name参数匹配上，则第一个出现listen的server将被匹配，多域名用空格分割<br>        server_name  www.nginx.com;</p>
@@ -264,7 +262,7 @@ location /i/ {
         </div>
         <div>
             
-                License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+                版權聲明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
 知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
 </a>
             
@@ -313,7 +311,7 @@ location /i/ {
         
         
     <div class="widget">
-        <h3 class="title">Categories</h3>
+        <h3 class="title">分類</h3>
         <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/技术/"><i class="fa" aria-hidden="true">技术</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/旅游/"><i class="fa" aria-hidden="true">旅游</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/"><i class="fa" aria-hidden="true">随感</i></a><span class="category-list-count">1</span></li></ul>
     </div>
 
@@ -321,7 +319,7 @@ location /i/ {
         
         
     <div class="widget">
-      <h3 class="title">Archives</h3>
+      <h3 class="title">彙整</h3>
         <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">November 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">October 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">September 2017</i></a><span class="archive-list-count">4</span></li></ul>
     </div>
 
@@ -329,10 +327,10 @@ location /i/ {
         
         
   <div class="widget">
-    <h3 class="title">Tag Cloud</h3>
+    <h3 class="title">標籤雲</h3>
     <div class="content tag-cloud">
       
-        <a href="undefinedtags/nginx-服务器配置/" style="font-size: 1em;">nginx 服务器配置</a> <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a> <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a> <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a> <a href="undefinedtags/nginx/" style="font-size: 1em;">nginx</a> <a href="undefinedtags/挖矿/" style="font-size: 1em;">挖矿</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a> <a href="undefinedtags/阅读论文/" style="font-size: 1em;">阅读论文</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a>
+        <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a> <a href="undefinedtags/挖矿/" style="font-size: 1em;">挖矿</a> <a href="undefinedtags/阅读论文/" style="font-size: 1em;">阅读论文</a> <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a> <a href="undefinedtags/nginx-服务器配置/" style="font-size: 1em;">nginx 服务器配置</a> <a href="undefinedtags/nginx/" style="font-size: 1em;">nginx</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a> <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a>
     </div>
   </div>
 
@@ -340,7 +338,7 @@ location /i/ {
         
         
     <div class="widget">
-        <h3 class="title">Friends</h3>
+        <h3 class="title">友鏈</h3>
         <div class="content friends-link">
         
             <a href="http://meixufen.github.io" class="fa" target="_blank">作者博客</a>
