@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/11/08/tech/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2017-11-24T05:47:46.294Z</lastmod>
+    <data>
+        <display>
+        <title>nginx配置文件</title>
+        <pubTime>2017-11-08T13:37:43.000Z</pubTime>
+        
+        <tag>nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术" url="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/11/24/tech/nginx%E5%AD%97%E6%AE%B5/</loc>
     <lastmod>2017-11-24T05:35:18.113Z</lastmod>
     <data>
@@ -52,26 +72,6 @@
         <pubTime>2017-09-16T13:01:42.000Z</pubTime>
         
         <tag>制作博客</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术" url="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/11/08/tech/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</loc>
-    <lastmod>2017-11-08T14:01:56.582Z</lastmod>
-    <data>
-        <display>
-        <title>nginx配置文件</title>
-        <pubTime>2017-11-08T13:37:43.000Z</pubTime>
-        
-        <tag>nginx</tag>
          
          
            
