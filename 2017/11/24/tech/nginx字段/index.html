@@ -1,0 +1,395 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable"  content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <link rel="dns-prefetch" href="//t11.baidu.com">
+    <!--SEO-->
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>nginx字段 | 渣渣媛想学习</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="渣渣媛想学习" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+
+
+    
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header">
+    <div class="main-header-box">
+        <a class="branding" href="/" title="">
+            <img src="/img/header_logo.png" alt="Snippet 博客主题">
+        </a>
+        <h2 class="text-hide">Snippet主题</h2>
+        <img src="/img/header_logo.png" alt="Snippet 博客主题" class="hide">
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class=""><a href="/">Home</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/技术/">技术</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/随感/">随感</a></li>
+                        
+                            <li role="presentation" class=""><a href="/categories/旅游/">旅游</a></li>
+                        
+                            <li role="presentation" class=""><a href="https://github.com/meixufen">github</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="nginx字段">
+            
+            nginx字段
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>技术</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            nginx 服务器配置
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/11/24</span>
+    </span>
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <hr>
+<p>title: nginx字段<br>date: 2017-11-24 11:59:54<br>categories: 技术</p>
+<h2 id="tags-nginx"><a href="#tags-nginx" class="headerlink" title="tags: nginx"></a>tags: nginx</h2><h1 id="主模块的配置选项"><a href="#主模块的配置选项" class="headerlink" title="主模块的配置选项"></a>主模块的配置选项</h1><p>user www-data;   </p>
+<p>#设置进程以什么用户运行，编译安装时没有指定则默认为nobody账户<br>pid /run/nginx.pid;   </p>
+<p>#设置pid文件路径，可以使用kill命令发送相关信号<br>worker_processes auto;  </p>
+<p>#设置工作进程数，一个工作进程为一个单线程，在CPU密集型环境中，可以设置为CPU核数<br>worker_rlimit_nofile 100000;</p>
+<p>#worker_rlimit_nofile 更改worker进程的最大打开文件数限制。如果没设置的话，这个值为操作系统的限制。设置后你的操作系统和Nginx可以处理比“ulimit -a”更多的文件，所以把这个值设高，这样nginx就不会有“too many open files”问题了。</p>
+<h1 id="event模块配置选项"><a href="#event模块配置选项" class="headerlink" title="event模块配置选项"></a>event模块配置选项</h1><p>event模块主要控制nginx处理连接的方式<br>events {<br>  worker_connections 768;   </p>
+<p>  #一个worker进程同时打开的最大连接数</p>
+<p>  #worker_connections和worker_processes可以计算你的理论最大链接数：worker_connections*worker_processes</p>
+<pre><code>use epoll;
+</code></pre><p>#如果在configure时指定的不止一个事件模型，可以通过use告诉nginx要使用哪一个模型：seletc、poll、kqueue、epoll、rtsig、/dev/poll、eventport等，设置用于复用客户端线程的轮询方法。<br>Ps: 如果你使用Linux 2.6+，你应该使用epoll。如果你使用*BSD，你应该使用kqueue。如果你不知道Nginx该使用哪种轮询方法的话，它会选择一个最适合你操作系统的</p>
+<p>  multi_accept on;</p>
+<p>#指示nginx收到一个新连接通知后接受尽可能多的连接。<br>}</p>
+<h1 id="http模块里面主要是对http服务器相关属性进行设置"><a href="#http模块里面主要是对http服务器相关属性进行设置" class="headerlink" title="http模块里面主要是对http服务器相关属性进行设置"></a>http模块里面主要是对http服务器相关属性进行设置</h1><p>nginx配置文件主要是Http字段，一个Http字段里面可以有多个字段，一个server字段代表一个虚拟主机。一个server里面可以有多个字段，每个location代表一个URI资源。<br>http {</p>
+<p>  #Basic Settings  基础设置<br>  sendfile on;   </p>
+<p>#sendfile拷贝文件在内核态完成，更加高效</p>
+<p>  tcp_nopush on;</p>
+<p>#指示nginx在一个数据包里发送所有头文件，而不是一个接一个的发送</p>
+<p>  tcp_nodelay on; </p>
+<p>  #nginx不要缓存数据，而是一段一段的发送——当需要及时发送数据时，就应该给应用设置这个属性，这样发送一小块数据信息时就不能立即得到返回值。</p>
+<p>  keepalive_timeout 65;</p>
+<p>  #可以设置两个值，第一个表示客户端与服务器长连接的超时时间，超过这个时间，服务器将关闭连接。第二个值指定的应答头中keep-alive中timeout的值，让浏览器知道什么时候关闭连接。<br>  types_hash_max_size 2048;</p>
+<p>  server_tokens off;</p>
+<p>#不会让nginx执行的速度更快，但它可以关闭在错误页面中的nginx版本数字，不在错误页面以及响应头中显示Nginx版本号。这样对于安全性是有好处的。</p>
+<p>  #server_names_hash_bucket_size 64;</p>
+<p>  #server_name_in_redirect off;</p>
+<p>  include /etc/nginx/mime.types;</p>
+<p>  #可以用include指令包含一些其他文件，支持通配符，可以使用绝对路径，也可以使用相对路径，相对路径以nginx.conf为根据<br>  default_type application/octet-stream; </p>
+<p>  #设置默认的MIME类型</p>
+<p>  #SSL Settings   SSL设置<br>  ssl_protocols TLSv1 TLSv1.1 TLSv1.2; </p>
+<p>  #Dropping SSLv3, ref: POODLE<br>  ssl_prefer_server_ciphers on;</p>
+<p>  #Logging Settings  日志记录<br>  access_log /var/log/nginx/access.log;  </p>
+<p>  #指定访问日志的路径和格式，缓冲区大小   默认combined格式。语法: access_log path [format [buffer=size [flush=time]]]; </p>
+<p>  #[]内为可选项</p>
+<p>  error_log /var/log/nginx/error.log;</p>
+<p>  #指定nginx错误日志文件的位置，禁止错误日志使用error_log /dev/null，可存在main，http，server字段</p>
+<p>  #Gzip Settings  gzip设置</p>
+<p>  #开启gzip压缩<br>  gzip on;<br>  gzip_disable “msie6”;</p>
+<p>#gzip_disable为指定的客户端禁用gzip功能。我们设置成IE6或者更低版本以使我们的方案能够广泛兼容。</p>
+<p>  #gzip_vary on;</p>
+<p>  #gzip_proxied any;</p>
+<p>#允许或者禁止压缩基于请求和响应的响应流。any将会压缩所有的请求。</p>
+<p>  #gzip_comp_level 6;</p>
+<p>#设置数据的压缩等级。这个等级可以是1-9之间的任意数值，9是最慢但是压缩比最大的。</p>
+<p>  #gzip_buffers 16 8k;</p>
+<p>  #gzip_http_version 1.1;</p>
+<p>  #gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</p>
+<p>  #设置需要压缩的数据格式。</p>
+<p>#在三次握手时，发送给客户端应答后的超时时间，目前还没进入连接状态，只完成了两次握手，如果在规定时间没收到应答包，nginx将关闭链接<br>send_timeout 30</p>
+<p>  #Virtual Host Configs<br>  include /etc/nginx/conf.d/<em>.conf;<br>  include /etc/nginx/sites-enabled/</em>;</p>
+<p>  #包含sites-enabled下的所有文件</p>
+<p>  #File upload<br>  client_max_body_size 12M;</p>
+<h1 id="server模块嵌在http模块中，主要用来配置虚拟主机"><a href="#server模块嵌在http模块中，主要用来配置虚拟主机" class="headerlink" title="server模块嵌在http模块中，主要用来配置虚拟主机"></a>server模块嵌在http模块中，主要用来配置虚拟主机</h1><p>  server {</p>
+<pre><code>#指定server字段中可以被访问到的ip地址及端口
+listen       80;
+</code></pre><p>#将http请求的主机头与server中的server_name参数进行匹配，并找出第一个结果，如果没有server_name参数匹配上，则第一个出现listen的server将被匹配，多域名用空格分割<br>        server_name  www.nginx.com;</p>
+<pre><code>#这个指令是应答头中的content-type字段使用指定的编码集，off表示不在应答头中添加content-type信息
+charset off;
+#PS：服务端根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对请求主体进行解析。
+
+#指定www.nginx.com域名的访问日志路径及格式
+</code></pre><p>#nginx日志记录有两条指令：<br>1)  log_format：用来设置日志格式；<br>2)  access_log：用来指定日志文件的存放路径、格式（把定义的log_format 跟在后面）和缓存大小；如果不想启用日志则access_log off ;<br>示例：<br> <img src="/images/nginx字段/fo.png" alt=""></p>
+<p>具体可设置的参数有：<br>  <img src="/images/nginx字段/arg.png" alt=""></p>
+<p>用了log_format 指令设置了日志格式之后，需要用access_log指令指定日志文件的存放路径；<br>语法：<br>access_log path(存放路径) format (自定义日志名称)<br>示例:<br>        access_log  logs/host.access.log  main;</p>
+<pre><code>#如果在url中没有指定文件，则设置一个默认主页，可以设置多个文件，空格分开，可以在http、server、location中设置
+</code></pre><p>PS：一般log_format在全局设置，可以设置多个。access_log 可以在全局设置，但往往是定义在虚拟主机（server）中的location中。<br>如：<br>    <img src="/images/nginx字段/logexa.png" alt=""></p>
+<pre><code>index  index.php index.htm;
+#根据URL的不同需求进行配置，可以使用字符串和正则匹配，最确切的匹配被使用，搜索到第一个后会停止
+
+#~* 不区分大小写；~ 区分大小写；^~ 禁止在字符串匹配后检查正则；= 在URL和location之间精确匹配，匹配完成后不做额外搜索。
+location /i/ {
+    #请求到达后的文件根目录，在请求中root会把location匹配的值加到root指定的值后面，请求/i/a.php，则会是/html/i/a.php响应
+    root   html;
+    #在location中设置index
+    index  index.html index.htm;
+}
+</code></pre><h2 id="root-path在server中位置："><a href="#root-path在server中位置：" class="headerlink" title="root path在server中位置："></a>root path在server中位置：</h2><p>在server中：表示全局的，对所有的location都有意义。<br>在location：局部的资源定义<br>location /a/ {<br>         root /var/www/;<br>}<br>location /就代表location里面的root，若是location里的root未定义，就从server里面继承！<br>如：/a/1.html = /var/www/a/1.html</p>
+<pre><code>    #为错误代码指定相应的错误界面，可以用在http、server、location字段中。
+    error_page  404              /404.html;
+    #从定向服务器错误页面到静态页面/50x.html
+    error_page   500 502 503 504  /50x.html;
+
+    #精确匹配50x.html，真实响应是/html/50x.html
+    location = /50x.html {
+        root   html;
+    }
+
+    #proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    location ~ \.php$ {
+        proxy_pass   http://127.0.0.1;
+    }
+    #配置php脚本传至fastcgi
+    location ~ \.php$ {
+      root           html;
+      fastcgi_pass   127.0.0.1:9000;
+      fastcgi_index  index.php;
+      #/scripts是php脚本所在的目录
+       fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+       include        fastcgi_params;
+   }
+
+    #拒绝访问.htaccess文件
+    location ~ /\.ht {
+        deny  all;
+    }
+}
+</code></pre><p>}</p>
+<h2 id="安全加固"><a href="#安全加固" class="headerlink" title="安全加固"></a>安全加固</h2><p>1）默认安装nginx是已经关闭目录浏览功能的（autoindex off;）<br>由于配置不当可能被打开（autoindex on;），如果业务需要目录浏览，可以针对特定目录进行设置。<br>仅对网站软件下载目录开放目录浏览功能。<br>  <img src="/images/nginx字段/auto.png" alt=""></p>
+<p>2）限制上传目录执行脚本<br>对upload目录进行限制，仅允许访问jpg等常见上传附件文件（根据业务需求自行修改允许的文件类型）。<br>   <img src="/images/nginx字段/up.png" alt=""></p>
+<p>3）备份文件处理<br>禁止对服务器下sql、bak等敏感文件进行访问（根据业务需求自行修改允许的文件类型）。<br>    <img src="/images/nginx字段/sql.png" alt=""></p>
+<p>4）不在错误页面以及响应头中显示Nginx版本号<br>在server段中配置：<br>server_tokens off;<br>5）重定向错误页面<br>将错误页面重定向到指定的错误页面（根据业务自行调整），避免显示nginx缺省的错误页面。<br>在server段中配置：<br>error_page 400 403 404 500 501 502 503 504 505 <a href="http://www.defvul.com/error.html" target="_blank" rel="external">http://www.defvul.com/error.html</a></p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
+        </div>
+        <div>
+            
+                License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2017/11/22/tech/coin-hive-com/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>个人的第一个博客，成立不久，后续慢慢添加，欢迎交流：meixufen@whu.edu.cn<br>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+        <h3 class="title">Categories</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/技术/"><i class="fa" aria-hidden="true">技术</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/旅游/"><i class="fa" aria-hidden="true">旅游</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/"><i class="fa" aria-hidden="true">随感</i></a><span class="category-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">Archives</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">November 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">October 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">September 2017</i></a><span class="archive-list-count">4</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">Tag Cloud</h3>
+    <div class="content tag-cloud">
+      
+        <a href="undefinedtags/nginx-服务器配置/" style="font-size: 1em;">nginx 服务器配置</a> <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a> <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a> <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a> <a href="undefinedtags/nginx/" style="font-size: 1em;">nginx</a> <a href="undefinedtags/挖矿/" style="font-size: 1em;">挖矿</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a> <a href="undefinedtags/阅读论文/" style="font-size: 1em;">阅读论文</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">Friends</h3>
+        <div class="content friends-link">
+        
+            <a href="http://meixufen.github.io" class="fa" target="_blank">作者博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017 
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
