@@ -21,7 +21,7 @@
     <!--Title-->
 
 
-<title>Tag: 阅读论文 | 渣渣媛想学习</title>
+<title>使用PHP和RSA实现安全登录 | 渣渣媛想学习</title>
 
 
     <link rel="alternate" href="/atom.xml" title="渣渣媛想学习" type="application/atom+xml">
@@ -33,6 +33,8 @@
 
 
 
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css?rev=9.12.0">
 
 
 <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
@@ -101,34 +103,94 @@
         <div class="container">
             <div class="row">
                 <main class="col-md-8 main-content">
-                    <h3> 
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="使用PHP和RSA实现安全登录">
+            
+            使用PHP和RSA实现安全登录
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <span>技术</span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            PHP 安全登录 RSA
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2017/12/09</span>
+    </span>
+</div>
 
-    阅读论文 
+            
+            
+    </div>
+    
+    <div class="post-body">
+        <h2 id="使用PHP，JS，RSA实现安全登录"><a href="#使用PHP，JS，RSA实现安全登录" class="headerlink" title="使用PHP，JS，RSA实现安全登录"></a>使用PHP，JS，RSA实现安全登录</h2><p>首先需要生成RSA公玥和私玥，下载openssl通过命令行生成：<br>进入openssl的bin目录下，打开openssl.exe命令行输入一下命令：<br>1、    生成RSA私钥<br>genrsa -out rsa_private_key.pem 1024 ；<br>得到exponent: 10001<br> <img src="/images/PHP_RSA/pri.png" alt=""></p>
+<p>2、    生成modulus<br>rsa -in rsa_private_key.pem -noout -modulus<br>  <img src="/images/PHP_RSA/mo.png" alt=""></p>
+<p>3、    生成RSA公钥<br>rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem<br>  <img src="/images/PHP_RSA/pub.png" alt=""></p>
+<p>则当前文件夹下的rsa_private_key.pem和rsa_public_key.pem文件即RSA私玥和公玥文件。<br>以下展示如何在客户端和服务器端使用公私玥<br>为了实现安全登录，采用公玥加密，私玥解密的方式，在前端将登录密码通过RSA加密后传输，在服务器端进行解密比较，实现登录验证。<br>前端JS代码<br>  <img src="/images/PHP_RSA/qian.png" alt=""></p>
+<p>38行的n即代表此前生成的modulus，e即10001，42行对代码密码进行加密，44行对用户名和密码进行传输，由此实现密码的安全传输。<br>PS：改加密过程需要使用到4个JS库，需要在html文件中引入库，分别如下：<br>  <img src="/images/PHP_RSA/si.png" alt=""></p>
+<p>由于库之间存在依赖关系，需要注意引用顺序（上图顺序尚可）。</p>
+<p>服务器端代码<br>  <img src="/images/PHP_RSA/server.png" alt=""></p>
+<p>其中$pwd即传输到后台的加密后的密钥，首先对其进行十六进制数据转换，然后使用私玥解密，得到的$decrypt_data即解密后的数据。<br>其后对数据进行判断操作即可。</p>
+<p>其实真的过程很简单，网上页有很多教程，但是在实验过程中，由于自己多此一举的将一长串私玥缩进成一行，导致解密数据不正确，无法完成验证，找了很久的原因才解决此问题，切记：直接将rsa_private_key.pem中文本拷贝到私玥变量中即可！切记切记！</p>
+<p>后记：这个问题真的想杀自己的心都有了，浪费自己时间，不过还好这么一折腾倒是对这个加密过程更加熟悉了。</p>
 
+    </div>
 
-</h3>
-
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/2017/11/06/tech/paper11-4/">11月论文阅读</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2017年11月06日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-                题目：Extension Breakdown: Security Analysis of Browsers Extension Resources Control Policies这篇文章分析了chromium类浏览器扩展、firef...
-            </p> 
+    <div class="post-footer">   
+        <div>
+            
+                转载声明: 商业转载请联系作者获得授权,非商业转载请注明出处 © Snippet
+            
         </div>
-    </article>
- 
+        <div>
+            
+                License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
+</a>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2017/11/24/tech/nginx字段/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
 
 
+    <div id="comments">
+        
+    <div id="uyan_frame"></div>
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+
+
+
+
+
+
+
+
+    </div>
 
 
 
@@ -219,6 +281,11 @@
         </div>
     </div>
 </div>
+
+  <script src="/assets/highlight.pack.js?rev=@@hash"></script>
+  <script>
+    hljs.initHighlightingOnLoad(); //初始化代码高亮 
+  </script>
 
 <script src="/js/app.js?rev=@@hash"></script>
 
