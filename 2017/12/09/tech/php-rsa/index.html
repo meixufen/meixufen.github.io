@@ -83,7 +83,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation" class=""><a href="/">Home</a></li>
+                            <li role="presentation" class=""><a href="/">首页</a></li>
                         
                             <li role="presentation" class=""><a href="/categories/技术/">技术</a></li>
                         
@@ -141,13 +141,15 @@
     </div>
     
     <div class="post-body">
-        <h2 id="使用PHP，JS，RSA实现安全登录"><a href="#使用PHP，JS，RSA实现安全登录" class="headerlink" title="使用PHP，JS，RSA实现安全登录"></a>使用PHP，JS，RSA实现安全登录</h2><p>首先需要生成RSA公玥和私玥，下载openssl通过命令行生成：<br>进入openssl的bin目录下，打开openssl.exe命令行输入一下命令：<br>1、    生成RSA私钥<br>genrsa -out rsa_private_key.pem 1024 ；<br>得到exponent: 10001<br> <img src="/images/PHP_RSA/pri.png" alt=""></p>
+        <h2 id="使用PHP，JS，RSA实现安全登录"><a href="#使用PHP，JS，RSA实现安全登录" class="headerlink" title="使用PHP，JS，RSA实现安全登录"></a>使用PHP，JS，RSA实现安全登录</h2><h3 id="首先需要生成RSA公玥和私玥，下载openssl通过命令行生成："><a href="#首先需要生成RSA公玥和私玥，下载openssl通过命令行生成：" class="headerlink" title="首先需要生成RSA公玥和私玥，下载openssl通过命令行生成："></a>首先需要生成RSA公玥和私玥，下载openssl通过命令行生成：</h3><p>进入openssl的bin目录下，打开openssl.exe命令行输入一下命令：<br>1、    生成RSA私钥<br>genrsa -out rsa_private_key.pem 1024 ；<br>得到exponent: 10001<br> <img src="/images/PHP_RSA/pri.png" alt=""></p>
 <p>2、    生成modulus<br>rsa -in rsa_private_key.pem -noout -modulus<br>  <img src="/images/PHP_RSA/mo.png" alt=""></p>
 <p>3、    生成RSA公钥<br>rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem<br>  <img src="/images/PHP_RSA/pub.png" alt=""></p>
-<p>则当前文件夹下的rsa_private_key.pem和rsa_public_key.pem文件即RSA私玥和公玥文件。<br>以下展示如何在客户端和服务器端使用公私玥<br>为了实现安全登录，采用公玥加密，私玥解密的方式，在前端将登录密码通过RSA加密后传输，在服务器端进行解密比较，实现登录验证。<br>前端JS代码<br>  <img src="/images/PHP_RSA/qian.png" alt=""></p>
+<p>则当前文件夹下的rsa_private_key.pem和rsa_public_key.pem文件即RSA私玥和公玥文件。</p>
+<h3 id="以下展示如何在客户端和服务器端使用公私玥"><a href="#以下展示如何在客户端和服务器端使用公私玥" class="headerlink" title="以下展示如何在客户端和服务器端使用公私玥"></a>以下展示如何在客户端和服务器端使用公私玥</h3><p>为了实现安全登录，采用公玥加密，私玥解密的方式，在前端将登录密码通过RSA加密后传输，在服务器端进行解密比较，实现登录验证。</p>
+<h4 id="前端JS代码"><a href="#前端JS代码" class="headerlink" title="前端JS代码"></a>前端JS代码</h4><p>  <img src="/images/PHP_RSA/qian.png" alt=""></p>
 <p>38行的n即代表此前生成的modulus，e即10001，42行对代码密码进行加密，44行对用户名和密码进行传输，由此实现密码的安全传输。<br>PS：改加密过程需要使用到4个JS库，需要在html文件中引入库，分别如下：<br>  <img src="/images/PHP_RSA/si.png" alt=""></p>
 <p>由于库之间存在依赖关系，需要注意引用顺序（上图顺序尚可）。</p>
-<p>服务器端代码<br>  <img src="/images/PHP_RSA/server.png" alt=""></p>
+<h4 id="服务器端代码"><a href="#服务器端代码" class="headerlink" title="服务器端代码"></a>服务器端代码</h4><p>  <img src="/images/PHP_RSA/server.png" alt=""></p>
 <p>其中$pwd即传输到后台的加密后的密钥，首先对其进行十六进制数据转换，然后使用私玥解密，得到的$decrypt_data即解密后的数据。<br>其后对数据进行判断操作即可。</p>
 <p>其实真的过程很简单，网上页有很多教程，但是在实验过程中，由于自己多此一举的将一长串私玥缩进成一行，导致解密数据不正确，无法完成验证，找了很久的原因才解决此问题，切记：直接将rsa_private_key.pem中文本拷贝到私玥变量中即可！切记切记！</p>
 <p>后记：这个问题真的想杀自己的心都有了，浪费自己时间，不过还好这么一折腾倒是对这个加密过程更加熟悉了。</p>
@@ -162,7 +164,7 @@
         </div>
         <div>
             
-                License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
 知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
 </a>
             
@@ -211,7 +213,7 @@
         
         
     <div class="widget">
-        <h3 class="title">Categories</h3>
+        <h3 class="title">分类</h3>
         <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/技术/"><i class="fa" aria-hidden="true">技术</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/旅游/"><i class="fa" aria-hidden="true">旅游</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/"><i class="fa" aria-hidden="true">随感</i></a><span class="category-list-count">1</span></li></ul>
     </div>
 
@@ -219,7 +221,7 @@
         
         
     <div class="widget">
-      <h3 class="title">Archives</h3>
+      <h3 class="title">归档</h3>
         <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">December 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">November 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">October 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">September 2017</i></a><span class="archive-list-count">4</span></li></ul>
     </div>
 
@@ -227,7 +229,7 @@
         
         
   <div class="widget">
-    <h3 class="title">Tag Cloud</h3>
+    <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
       
         <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a> <a href="undefinedtags/挖矿/" style="font-size: 1em;">挖矿</a> <a href="undefinedtags/nginx/" style="font-size: 1em;">nginx</a> <a href="undefinedtags/nginx-服务器配置/" style="font-size: 1em;">nginx 服务器配置</a> <a href="undefinedtags/PHP-安全登录-RSA/" style="font-size: 1em;">PHP 安全登录 RSA</a> <a href="undefinedtags/阅读论文/" style="font-size: 1em;">阅读论文</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a> <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a> <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a>
@@ -238,7 +240,7 @@
         
         
     <div class="widget">
-        <h3 class="title">Friends</h3>
+        <h3 class="title">友链</h3>
         <div class="content friends-link">
         
             <a href="http://meixufen.github.io" class="fa" target="_blank">作者博客</a>
