@@ -83,7 +83,7 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         
-                            <li role="presentation" class=""><a href="/">首页</a></li>
+                            <li role="presentation" class=""><a href="/">Home</a></li>
                         
                             <li role="presentation" class=""><a href="/categories/技术/">技术</a></li>
                         
@@ -142,18 +142,43 @@
     
     <div class="post-body">
         <p>前言：这是2018年招行finaTec管培生的复赛第二题，计算两个句子相似性。第一次接触机器学习，做得很简单，mark一下。</p>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a><strong>问题描述</strong></h3><p>题目：查找最相似新闻TOP 20；<br>给定数据：<br>test_data.csv：测试数据，每行包括id和title，共50条。<br> <img src="/images/simi/test.png" alt=""><br>train_data.csv：训练数据，和测试数据格式相同，共485686条。<br> <img src="/images/simi/train.png" alt=""><br>目标：为测试数据中的每条数据找到对应的最相似的20条（去除本身）。<br>评价标准：<br>官方给定正确答案，根据以下算法计算提交答案的分值：<br> <img src="/images/simi/for.png" alt=""><br> <img src="/images/simi/for2.png" alt=""></p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a><strong>问题描述</strong></h3><p>题目：查找最相似新闻TOP 20；<br>给定数据：<br>test_data.csv：测试数据，每行包括id和title，共50条。<br>   <img src="/images/simi/test.png" alt=""><br>train_data.csv：训练数据，和测试数据格式相同，共485686条。<br>   <img src="/images/simi/train.png" alt=""><br>目标：为测试数据中的每条数据找到对应的最相似的20条（去除本身）。<br>评价标准：<br>官方给定正确答案，根据以下算法计算提交答案的分值：<br>  <img src="/images/simi/for.png" alt=""><br>  <img src="/images/simi/for2.png" alt=""></p>
 <p>示例：<br>对新闻A选定top10相似新闻，如果正确答案的{a,b,c,d,e,f,g}，第一人提交答案是：{a,g,o,f,d,m,t,b,c,l}，第二人提交答案是：{o,m,t,l,a,g,f,d,b,c}，二人分别的得分是：<br><img src="/images/simi/res.png" alt=""><br>ft中分子表示t在找出的正确的新闻（红色标识）的位置，分母表示在提交集合中的位置。<br>计算每一条的得分进行加权平均得出总分。<br>处理流程：</p>
 <ol>
 <li>数据处理</li>
 <li>csv文件转换为txt格式，并去除标点符号；</li>
-<li>使用jieba分词将句子变为词语，并去除停用词；<h3 id="相似度计算方法"><a href="#相似度计算方法" class="headerlink" title="相似度计算方法"></a><strong>相似度计算方法</strong></h3><h3 id="编辑距离-向量距离"><a href="#编辑距离-向量距离" class="headerlink" title="编辑距离+向量距离"></a>编辑距离+向量距离</h3></li>
-<li>Levenshtein距离：从一个字符串修改到另一个字符串时，编辑单个字符（比如修改、插入、删除）所需要的最少次数；<br>从字符串“kitten”修改为字符串“sitting”：<br>因此“kitten”和“sitting”的Levenshtein距离为3。<br>实现：python-Levenshtein包中包含distance函数：<br>distance(s1,s2)；</li>
-<li>使用doc2bow计算距离：<br>doc2bow：每个文档用一个向量来表示。<h3 id="创建语料库："><a href="#创建语料库：" class="headerlink" title="创建语料库："></a>创建语料库：</h3> documents = [“Human machine interface for lab abc computer applications”,<br> “A survey of user opinion of computer system response time”,<br> “The EPS user interface management system”,<br> “System and human system engineering testing of EPS”,<br> “Relation of user perceived response time to error measuremen”,<br> “The generation of random binary unordered trees”,<br> “The intersection graph of paths in trees”,<br> “Graph minors IV Widths of trees and well quasi ordering”,<br> “Graph minors A survey”]<h3 id="分词，去除停用词："><a href="#分词，去除停用词：" class="headerlink" title="分词，去除停用词："></a>分词，去除停用词：</h3> [[‘human’, ‘interface’, ‘computer’],<br>  [‘survey’, ‘user’, ‘computer’, ‘system’, ‘response’, ‘time’],<br>  [‘eps’, ‘user’, ‘interface’, ‘system’],<br>  [‘system’, ‘human’, ‘system’, ‘eps’],<br>  [‘user’, ‘response’, ‘time’],<br>  [‘trees’],<br>  [‘graph’, ‘trees’],<br>  [‘graph’, ‘minors’, ‘trees’],<br>  [‘graph’, ‘minors’, ‘survey’]]<h3 id="形成字典："><a href="#形成字典：" class="headerlink" title="形成字典："></a>形成字典：</h3>gensim.corpora.dictionary.Dictionary类为每个出现在语料库中的词分配了一个整型的id，id和词形成映射，即词典：<br> {‘minors’: 11, ‘graph’: 10, ‘system’: 5, ‘trees’: 9, ‘eps’: 8, ‘computer’: 0,’survey’: 4, ‘user’: 7, ‘human’: 1, ‘time’: 6, ‘interface’: 2, ‘response’: 3}<h3 id="用向量表示文本："><a href="#用向量表示文本：" class="headerlink" title="用向量表示文本："></a>用向量表示文本：</h3> new_doc = “Human computer interaction”<br> new_vec = dictionary.doc2bow(new_doc.lower().split())<br> new_vec即[(0, 1), (1, 1)]<h3 id="建立语料之后，使用两种方法计算："><a href="#建立语料之后，使用两种方法计算：" class="headerlink" title="建立语料之后，使用两种方法计算："></a>建立语料之后，使用两种方法计算：</h3><ol>
-<li>BOW词袋模型：由doc2bow变为词袋，输出的格式为：[(0, 1), (1, 1)]</li>
-<li>建立TFIDF：使用tf-idf 模型得出语料库的tf-idf 模型<br>两种模型都可以使用similarities.Similarity获取测试向量和语料库中最接近的文档向量。<h3 id="doc2vec计算距离："><a href="#doc2vec计算距离：" class="headerlink" title="doc2vec计算距离："></a>doc2vec计算距离：</h3></li>
+<li>使用jieba分词将句子变为词语，并去除停用词；</li>
 </ol>
-</li>
+<h3 id="相似度计算方法"><a href="#相似度计算方法" class="headerlink" title="相似度计算方法"></a><strong>相似度计算方法</strong></h3><h3 id="编辑距离-向量距离"><a href="#编辑距离-向量距离" class="headerlink" title="编辑距离+向量距离"></a>编辑距离+向量距离</h3><ol>
+<li>Levenshtein距离：从一个字符串修改到另一个字符串时，编辑单个字符（比如修改、插入、删除）所需要的最少次数；<br>从字符串“kitten”修改为字符串“sitting”：<br>因此“kitten”和“sitting”的Levenshtein距离为3。<br>实现：python-Levenshtein包中包含distance函数：<br>distance(s1,s2)；</li>
+<li>使用doc2bow计算距离：<br>doc2bow：每个文档用一个向量来表示。</li>
+</ol>
+<h3 id="创建语料库："><a href="#创建语料库：" class="headerlink" title="创建语料库："></a>创建语料库：</h3><pre><code>documents = [&quot;Human machine interface for lab abc computer applications&quot;,
+&quot;A survey of user opinion of computer system response time&quot;,
+&quot;The EPS user interface management system&quot;,
+&quot;System and human system engineering testing of EPS&quot;,
+&quot;Relation of user perceived response time to error measuremen&quot;,
+&quot;The generation of random binary unordered trees&quot;,
+&quot;The intersection graph of paths in trees&quot;,
+&quot;Graph minors IV Widths of trees and well quasi ordering&quot;,
+&quot;Graph minors A survey&quot;]
+</code></pre><h3 id="分词，去除停用词："><a href="#分词，去除停用词：" class="headerlink" title="分词，去除停用词："></a>分词，去除停用词：</h3><pre><code>[[&apos;human&apos;, &apos;interface&apos;, &apos;computer&apos;],
+ [&apos;survey&apos;, &apos;user&apos;, &apos;computer&apos;, &apos;system&apos;, &apos;response&apos;, &apos;time&apos;],
+ [&apos;eps&apos;, &apos;user&apos;, &apos;interface&apos;, &apos;system&apos;],
+ [&apos;system&apos;, &apos;human&apos;, &apos;system&apos;, &apos;eps&apos;],
+ [&apos;user&apos;, &apos;response&apos;, &apos;time&apos;],
+ [&apos;trees&apos;],
+ [&apos;graph&apos;, &apos;trees&apos;],
+ [&apos;graph&apos;, &apos;minors&apos;, &apos;trees&apos;],
+ [&apos;graph&apos;, &apos;minors&apos;, &apos;survey&apos;]]
+</code></pre><h3 id="形成字典："><a href="#形成字典：" class="headerlink" title="形成字典："></a>形成字典：</h3><p>gensim.corpora.dictionary.Dictionary类为每个出现在语料库中的词分配了一个整型的id，id和词形成映射，即词典：<br>    {‘minors’: 11, ‘graph’: 10, ‘system’: 5, ‘trees’: 9, ‘eps’: 8, ‘computer’: 0,’survey’: 4, ‘user’: 7, ‘human’: 1, ‘time’: 6, ‘interface’: 2, ‘response’: 3}</p>
+<h3 id="用向量表示文本："><a href="#用向量表示文本：" class="headerlink" title="用向量表示文本："></a>用向量表示文本：</h3><pre><code>new_doc = &quot;Human computer interaction&quot;
+new_vec = dictionary.doc2bow(new_doc.lower().split())
+new_vec即[(0, 1), (1, 1)]
+</code></pre><h3 id="建立语料之后，使用两种方法计算："><a href="#建立语料之后，使用两种方法计算：" class="headerlink" title="建立语料之后，使用两种方法计算："></a>建立语料之后，使用两种方法计算：</h3><pre><code>1. BOW词袋模型：由doc2bow变为词袋，输出的格式为：[(0, 1), (1, 1)]
+2. 建立TFIDF：使用tf-idf 模型得出语料库的tf-idf 模型
+</code></pre><p>两种模型都可以使用similarities.Similarity获取测试向量和语料库中最接近的文档向量。</p>
+<h3 id="doc2vec计算距离："><a href="#doc2vec计算距离：" class="headerlink" title="doc2vec计算距离："></a>doc2vec计算距离：</h3><ol>
 <li>基于word2vec的基础发展；</li>
 <li>Word2vec考虑词level上的语义信息，但是没有考虑句子的上下文信息，如果取词的向量均值表示句子的向量，会缺失单词之间的排列顺序对句子和文本之间的影响。</li>
 </ol>
@@ -190,7 +215,7 @@
         </div>
         <div>
             
-                版权声明: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
+                License: <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">
 知识共享署名-非商业性使用-禁止演绎 3.0 未本地化版本许可协议（CC BY-NC-ND 3.0）
 </a>
             
@@ -239,7 +264,7 @@
         
         
     <div class="widget">
-        <h3 class="title">分类</h3>
+        <h3 class="title">Categories</h3>
         <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/技术/"><i class="fa" aria-hidden="true">技术</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/旅游/"><i class="fa" aria-hidden="true">旅游</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随感/"><i class="fa" aria-hidden="true">随感</i></a><span class="category-list-count">2</span></li></ul>
     </div>
 
@@ -247,7 +272,7 @@
         
         
     <div class="widget">
-      <h3 class="title">归档</h3>
+      <h3 class="title">Archives</h3>
         <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">May 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">December 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">November 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/"><i class="fa" aria-hidden="true">October 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">September 2017</i></a><span class="archive-list-count">4</span></li></ul>
     </div>
 
@@ -255,7 +280,7 @@
         
         
   <div class="widget">
-    <h3 class="title">标签云</h3>
+    <h3 class="title">Tag Cloud</h3>
     <div class="content tag-cloud">
       
         <a href="undefinedtags/nginx/" style="font-size: 1em;">nginx</a> <a href="undefinedtags/机器学习-句子相似性-词袋模型-gensim/" style="font-size: 1em;">机器学习 句子相似性 词袋模型 gensim</a> <a href="undefinedtags/半生缘-张爱玲/" style="font-size: 1em;">半生缘 张爱玲</a> <a href="undefinedtags/诗/" style="font-size: 1em;">诗</a> <a href="undefinedtags/扩展/" style="font-size: 1em;">扩展</a> <a href="undefinedtags/挖矿/" style="font-size: 1em;">挖矿</a> <a href="undefinedtags/游记/" style="font-size: 1em;">游记</a> <a href="undefinedtags/制作博客/" style="font-size: 1em;">制作博客</a> <a href="undefinedtags/nginx-服务器配置/" style="font-size: 1em;">nginx 服务器配置</a> <a href="undefinedtags/阅读论文/" style="font-size: 1em;">阅读论文</a> <a href="undefinedtags/PHP-安全登录-RSA/" style="font-size: 1em;">PHP 安全登录 RSA</a> <a href="undefinedtags/php-ajax-session-判断登录状态/" style="font-size: 1em;">php ajax session 判断登录状态</a> <a href="undefinedtags/谷歌-账号注册/" style="font-size: 1em;">谷歌 账号注册</a>
@@ -266,7 +291,7 @@
         
         
     <div class="widget">
-        <h3 class="title">友链</h3>
+        <h3 class="title">Friends</h3>
         <div class="content friends-link">
         
             <a href="http://meixufen.github.io" class="fa" target="_blank">我的github</a>
