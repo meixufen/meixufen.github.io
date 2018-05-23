@@ -141,7 +141,7 @@
     </div>
     
     <div class="post-body">
-        <p>前言：这是2018年招行finaTec管培生的复赛第二题，计算两个句子相似性。第一次接触机器学习，做得很简单，mark一下。</p>
+        <p>前言：这是2018年招行FinTech管培生的复赛第二题，计算两个句子相似性。第一次接触机器学习，做得很简单，mark一下。</p>
 <h3 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1. 问题描述"></a><strong>1. 问题描述</strong></h3><p>题目：查找最相似新闻TOP 20；<br>给定数据：<br>test_data.csv：测试数据，每行包括id和title，共50条。<br>   <img src="/images/simi/test.png" alt=""><br>train_data.csv：训练数据，和测试数据格式相同，共485686条。<br>   <img src="/images/simi/train.png" alt=""><br>目标：为测试数据中的每条数据找到对应的最相似的20条（去除本身）。<br>评价标准：<br>官方给定正确答案，根据以下算法计算提交答案的分值：<br>  <img src="/images/simi/for.png" alt=""><br>  <img src="/images/simi/for2.png" alt=""></p>
 <p>示例：<br>对新闻A选定top10相似新闻，如果正确答案的{a,b,c,d,e,f,g}，第一人提交答案是：{a,g,o,f,d,m,t,b,c,l}，第二人提交答案是：{o,m,t,l,a,g,f,d,b,c}，二人分别的得分是：<br><img src="/images/simi/res.png" alt=""><br>ft中分子表示t在找出的正确的新闻（红色标识）的位置，分母表示在提交集合中的位置。<br>计算每一条的得分进行加权平均得出总分。<br>处理流程：</p>
 <ol>
@@ -204,6 +204,7 @@ new_vec即[(0, 1), (1, 1)]
 </tr>
 </tbody>
 </table>
+<p>后记：源代码可在此处<a href="https://github.com/meixufen/2018-FinTech.git" target="_blank" rel="external">下载</a></p>
 
     </div>
 
