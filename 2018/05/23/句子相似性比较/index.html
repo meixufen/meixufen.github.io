@@ -142,14 +142,14 @@
     
     <div class="post-body">
         <p>前言：这是2018年招行finaTec管培生的复赛第二题，计算两个句子相似性。第一次接触机器学习，做得很简单，mark一下。</p>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a><strong>问题描述</strong></h3><p>题目：查找最相似新闻TOP 20；<br>给定数据：<br>test_data.csv：测试数据，每行包括id和title，共50条。<br>   <img src="/images/simi/test.png" alt=""><br>train_data.csv：训练数据，和测试数据格式相同，共485686条。<br>   <img src="/images/simi/train.png" alt=""><br>目标：为测试数据中的每条数据找到对应的最相似的20条（去除本身）。<br>评价标准：<br>官方给定正确答案，根据以下算法计算提交答案的分值：<br>  <img src="/images/simi/for.png" alt=""><br>  <img src="/images/simi/for2.png" alt=""></p>
+<h3 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1. 问题描述"></a><strong>1. 问题描述</strong></h3><p>题目：查找最相似新闻TOP 20；<br>给定数据：<br>test_data.csv：测试数据，每行包括id和title，共50条。<br>   <img src="/images/simi/test.png" alt=""><br>train_data.csv：训练数据，和测试数据格式相同，共485686条。<br>   <img src="/images/simi/train.png" alt=""><br>目标：为测试数据中的每条数据找到对应的最相似的20条（去除本身）。<br>评价标准：<br>官方给定正确答案，根据以下算法计算提交答案的分值：<br>  <img src="/images/simi/for.png" alt=""><br>  <img src="/images/simi/for2.png" alt=""></p>
 <p>示例：<br>对新闻A选定top10相似新闻，如果正确答案的{a,b,c,d,e,f,g}，第一人提交答案是：{a,g,o,f,d,m,t,b,c,l}，第二人提交答案是：{o,m,t,l,a,g,f,d,b,c}，二人分别的得分是：<br><img src="/images/simi/res.png" alt=""><br>ft中分子表示t在找出的正确的新闻（红色标识）的位置，分母表示在提交集合中的位置。<br>计算每一条的得分进行加权平均得出总分。<br>处理流程：</p>
 <ol>
 <li>数据处理</li>
 <li>csv文件转换为txt格式，并去除标点符号；</li>
 <li>使用jieba分词将句子变为词语，并去除停用词；</li>
 </ol>
-<h3 id="相似度计算方法"><a href="#相似度计算方法" class="headerlink" title="相似度计算方法"></a><strong>相似度计算方法</strong></h3><h3 id="编辑距离-向量距离"><a href="#编辑距离-向量距离" class="headerlink" title="编辑距离+向量距离"></a>编辑距离+向量距离</h3><ol>
+<h3 id="2-相似度计算方法"><a href="#2-相似度计算方法" class="headerlink" title="2. 相似度计算方法"></a><strong>2. 相似度计算方法</strong></h3><h3 id="编辑距离-向量距离"><a href="#编辑距离-向量距离" class="headerlink" title="编辑距离+向量距离"></a>编辑距离+向量距离</h3><ol>
 <li>Levenshtein距离：从一个字符串修改到另一个字符串时，编辑单个字符（比如修改、插入、删除）所需要的最少次数；<br>从字符串“kitten”修改为字符串“sitting”：<br>因此“kitten”和“sitting”的Levenshtein距离为3。<br>实现：python-Levenshtein包中包含distance函数：<br>distance(s1,s2)；</li>
 <li>使用doc2bow计算距离：<br>doc2bow：每个文档用一个向量来表示。</li>
 </ol>
@@ -182,7 +182,7 @@ new_vec即[(0, 1), (1, 1)]
 <li>基于word2vec的基础发展；</li>
 <li>Word2vec考虑词level上的语义信息，但是没有考虑句子的上下文信息，如果取词的向量均值表示句子的向量，会缺失单词之间的排列顺序对句子和文本之间的影响。</li>
 </ol>
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a><strong>结果</strong></h3><table>
+<h3 id="3-结果"><a href="#3-结果" class="headerlink" title="3. 结果"></a><strong>3. 结果</strong></h3><table>
 <thead>
 <tr>
 <th style="text-align:left">方法</th>
